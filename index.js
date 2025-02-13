@@ -9,7 +9,7 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 const YT_API_KEY = process.env.YT_API_KEY;
 
-app.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.send('join us!!');
 });
 app.use("/playlist", playlistRoutes);
