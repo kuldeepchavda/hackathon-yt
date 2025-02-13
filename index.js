@@ -12,7 +12,7 @@ const YT_API_KEY = process.env.YT_API_KEY;
 app.use("/playlist", playlistRoutes);
 
 
-app.use("/demo", async(req,res)=>{
+app.get("/demo", async(req,res)=>{
   res.send("This is working");
 });
 
