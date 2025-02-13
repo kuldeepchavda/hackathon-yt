@@ -1,10 +1,10 @@
 const mongoose =require("mongoose")
 const playlistSchema = new mongoose.Schema({
-  playlistId: { type: String, required: true },
+  playlistId: { type: String, required: true, unique: true },
   videos: [{ id: String, watched: { type: Boolean, default: false } }],
   total: { type: Number, required: true },
   completed: { type: Number, default: 0 },
 });
 
-const Playlist = mongoose.model("Playlist87", playlistSchema);
+const Playlist = mongoose.model("Playlist_", playlistSchema);
 module.exports=Playlist

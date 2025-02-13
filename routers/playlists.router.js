@@ -6,4 +6,6 @@ router.route("/demo").get(async(req,res)=>{
     res.status(200).json({"status":"This is working fine..."})
 });
 
+router.route("/watched").post(playlistCTRL.markVideoAsWatched);
+router.route("/getall").get(playlistCTRL.getAllPlaylist);
 module.exports = router;

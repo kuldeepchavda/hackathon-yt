@@ -5,26 +5,32 @@ const Playlist = require("../models/Playlists");
 
 const savePlaylist = async (req, res) => {
   const { playlistId } = req.body;
+
   if (!playlistId) {
     return res.status(400).json({ error: "Invalid data" });
   }
+  const exists = await Playlist.find({ playlistId });
 
-  try {
-    const videos = await fetchAllVideos(playlistId); 
+  if ((exists.length) === 0) {
+    try {
+      const videos = await fetchAllVideos(playlistId);
 
-    const savedPlaylist = await Playlist.create({
-      playlistId,
-      videos,
-      total: videos.length,
-      completed: 0,
-    });
+      const savedPlaylist = await Playlist.create({
+        playlistId,
+        videos,
+        total: videos.length,
+        completed: 0,
+      });
 
-    res.json({
-      message: "Playlist saved successfully",
-      playlist: savedPlaylist,
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.json({
+        message: "Playlist saved successfully",
+        playlist: savedPlaylist,
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  } else {
+    res.send("Exists");
   }
 };
 
@@ -56,4 +62,41 @@ const fetchAllVideos = async (playlistId) => {
   }
 };
 
-module.exports = { savePlaylist };
+
+const markVideoAsWatched = async (req, res) => {
+    const {playlistId,videoId} = req.body;
+  try {
+    const playlist = await Playlist.findOne({ playlistId });
+
+    if (!playlist) {
+      res.status(400).json({ error: "Playlist not found" });
+    }
+
+    const video = playlist.videos.find((v) => v.id === videoId);
+
+    if (!video) {
+      return res.status(400).json({ error: "Video not found in the playlist" });
+    }
+
+    // if (video.watched) {
+    //   return { message: "Video already marked as watched" };
+    // }
+
+    video.watched = true;
+    playlist.completed += 1;
+
+    await playlist.save();
+
+     res.status(200).json({status:1});
+  } catch (error) {
+    console.error("Error updating video status:", error.message);
+    res.send(error.message);
+    // return { error: "Internal server error" };
+  }
+};
+const getAllPlaylist=async(req,res)=>{
+  const r = await Playlist.find()
+  res.send(r)
+}
+
+module.exports = { savePlaylist, markVideoAsWatched, getAllPlaylist };
