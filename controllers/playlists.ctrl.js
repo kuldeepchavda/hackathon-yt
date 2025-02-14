@@ -22,7 +22,7 @@ const savePlaylist = async (req, res) => {
         completed: 0,
       });
 
-         res.json({ data:  savedPlaylist });
+         res.json({ data:  savedPlaylist.videos });
 
     } catch (error) {
       res.status(500).json({ error: error.message });
