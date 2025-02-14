@@ -8,4 +8,8 @@ router.route("/demo").get(async(req,res)=>{
 
 router.route("/watched").post(playlistCTRL.markVideoAsWatched);
 router.route("/getall").get(playlistCTRL.getAllPlaylist);
+
+// playlist page
+
+router.route("/playlist_list").get(playlistCTRL.getPlaylist_list);
 module.exports = router;

@@ -103,4 +103,15 @@ const getAllPlaylist=async(req,res)=>{
   res.send(r)
 }
 
-module.exports = { savePlaylist, markVideoAsWatched, getAllPlaylist };
+const getPlaylist_list  =async (req,res)=>{
+try {
+  // const { playlistId } = req.params;
+  const response =await Playlist.find({},{"playlistId":1});
+  res.json({ playlist: response });
+} catch (error) {
+  res.status(400).json({message:error.message})
+}
+
+}
+
+module.exports = { savePlaylist, markVideoAsWatched, getAllPlaylist,getPlaylist_list };
