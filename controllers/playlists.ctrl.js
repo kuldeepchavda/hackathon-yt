@@ -103,6 +103,12 @@ const getAllPlaylist=async(req,res)=>{
   res.send(r)
 }
 
+const getVidById = async (req, res) => {
+  const {playlistId}  = req.params;
+  const r = await Playlist.find({playlistId:playlistId},{"videos":1});
+  res.send(r);
+};
+
 const getPlaylist_list  =async (req,res)=>{
 try {
   // const { playlistId } = req.params;
@@ -114,4 +120,10 @@ try {
 
 }
 
-module.exports = { savePlaylist, markVideoAsWatched, getAllPlaylist,getPlaylist_list };
+module.exports = {
+  savePlaylist,
+  getVidById,
+  markVideoAsWatched,
+  getAllPlaylist,
+  getPlaylist_list,
+};

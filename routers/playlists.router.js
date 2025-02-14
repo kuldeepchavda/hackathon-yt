@@ -8,6 +8,7 @@ router.route("/demo").get(async(req,res)=>{
 
 router.route("/watched").post(playlistCTRL.markVideoAsWatched);
 router.route("/getall").get(playlistCTRL.getAllPlaylist);
+router.route("/get/:playlistId").get(playlistCTRL.getVidById);
 
 // playlist page
 
