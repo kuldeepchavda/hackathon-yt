@@ -3,12 +3,14 @@ services:
     name: my-express-backend
     env: node
     plan: free  # Change to 'starter' or 'pro' if needed
-    region: oregon  # Change based on preference
+    region: oregon  # Change based on your preference
     branch: main  # Ensure this matches your branch name
     buildCommand: npm install
-    startCommand: node server.js  # Update this if you use a different entry file
+    startCommand: node index.js  # Corrected from server.js to index.js
     envVars:
       - key: PORT
-        value: 10000  # Ensure your Express app listens on this port
+        value: 8000  # Ensure your app listens on this port
       - key: MONGO_URI
-        sync: false  # Set in Render's dashboard
+        sync: false  # Set it in Render dashboard if sensitive
+      - key: YT_API_KEY
+        sync: false  # Set in Render's dashboard manually
