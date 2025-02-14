@@ -22,15 +22,13 @@ const savePlaylist = async (req, res) => {
         completed: 0,
       });
 
-      res.json({
-        message: "Playlist saved successfully",
-        playlist: savedPlaylist,
-      });
+         res.json({ data:  savedPlaylist });
+
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   } else {
-    res.send("Exists");
+    res.json({data:"Exists"});
   }
 };
 
