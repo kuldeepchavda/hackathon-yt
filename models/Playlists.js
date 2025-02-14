@@ -6,5 +6,5 @@ const playlistSchema = new mongoose.Schema({
   completed: { type: Number, default: 0 },
 });
 
-const Playlist = mongoose.model("Playlist_", playlistSchema);
+const Playlist = mongoose.model("Playlist_3", playlistSchema);
 module.exports=Playlist
