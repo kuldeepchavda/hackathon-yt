@@ -4,6 +4,19 @@ app.use(express.json())
 const axios = require("axios");
 const connectDB= require("./Database/mongoose")
 const playlistRoutes = require("./routers/playlists.router.js")
+const cors = require("cors")
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow credentials (cookies, sessions) to be sent
+};
+
+app.use(cors(corsOptions));
+
+
 require("dotenv").config();
 connectDB();
 const PORT = process.env.PORT || 5000;
