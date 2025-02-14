@@ -48,6 +48,12 @@ const fetchAllVideos = async (playlistId) => {
       const fetchedVideos = response.data.items.map((item) => ({
         id: item.snippet.resourceId.videoId,
         title: item.snippet.title,
+        thumbnail: {
+          default: item.snippet.thumbnails.default?.url || "",
+          medium: item.snippet.thumbnails.medium?.url || "",
+          large: item.snippet.thumbnails.high?.url || "",
+          standard: item.snippet.thumbnails.standard?.url || "",
+        },
         watched: false,
       }));
 
